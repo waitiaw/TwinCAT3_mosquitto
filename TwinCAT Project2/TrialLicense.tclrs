@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
+	<LicenseInfo>
+		<SystemId>{C1965462-5930-834D-9626-AF0F171826D2}</SystemId>
+		<IssueTime>2024-08-22T06:34:00</IssueTime>
+		<ExpireTime>2024-08-30T00:00:00</ExpireTime>
+		<LicenseKey>acce0593b1489a3b2ee2f7078e80d3ed93f313200063bff64ca1fe2b151bc271e2b6744c4b7d21fa2bfca05d78ca0714ca4353327b9e5f9c62c76699d81e67906be924e6e19391d58b15c431c2e1c7cf1cf442802cb0f53da81d7c3ed6103f6d08a6e35c30c8d35feb57f241b913953b62e631400fe70946415b7aa9362cd4540b78fba9181010ff49ea86d3edfb5953816447ac8e7787533f6b6c749e8b73ee6db7eab2cab9c98355d4b065a99a90dd2182de21fd3b229de49e4371b218ce3ea30cf68b72ba4bad1c566b41d254e702298d495f52ab6861d20c6a11820535458519a398a0fc7411a85a22058c4d27eb98338f199ebfde8bf89ef9a81bee7f93</LicenseKey>
+		<License>
+			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
+			<Name>TC3 ADS</Name>
+			<OrderNo>TC1000</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{3FF18E97-7754-401B-93FB-70544DE28A13}</LicenseId>
+			<Name>TC3 IO</Name>
+			<OrderNo>TC1100</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
+			<Name>TC3 PLC</Name>
+			<OrderNo>TC1200</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{973BA0B1-AADD-41C1-B518-302802473922}</LicenseId>
+			<Name>TC3 IoT MQTT Protocol</Name>
+		</License>
+		<License>
+			<LicenseId>{0ABFD2B0-EAE1-4DC7-AABE-03093B0786B7}</LicenseId>
+			<Name>TC3 IoT Communication (MQTT)</Name>
+			<OrderNo>TF6701</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{54BC404D-F267-4F81-A7FD-9796672C1C24}</LicenseId>
+			<Name>TC3 EtherCAT External Sync</Name>
+			<OrderNo>TF6225</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</LicenseId>
+			<Name>TC3 TCP/IP</Name>
+			<OrderNo>TF6310</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{3E823FFB-0BB3-43BA-9023-5952947C15A8}</LicenseId>
+			<Name>TC3 FTP</Name>
+			<OrderNo>TF6300</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{777F1598-583B-4503-99BB-7C02E0ABD97E}</LicenseId>
+			<Name>TC3 Controller Toolbox</Name>
+			<OrderNo>TF4100</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{6952449D-F68C-49A2-ADE4-8639D85B33A4}</LicenseId>
+			<Name>TC3 Modbus-TCP</Name>
+			<OrderNo>TF6250</OrderNo>
+		</License>
+	</LicenseInfo>
+</TcLicenseInfo>

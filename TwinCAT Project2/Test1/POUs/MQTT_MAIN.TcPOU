@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="MQTT_MAIN" Id="{a8b84a10-c9dc-4875-8268-1f4693fde02f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MQTT_MAIN
+VAR
+	fbMqttClient : FB_IotMqttClient;
+	bSetParmeter : BOOL := TRUE;
+	bconnect : BOOL := TRUE;
+	
+	sTopicPub1 : STRING := 'my first topic';
+	sTopicPub2 : STRING := 'my second topic'; 
+	sPayloadPub : STRING;
+	i : UINT;
+	fbTimer : TON := (PT:=T#1S);
+	
+	bSubscribed : BOOL;
+	//sTopicSub : STRING := 'topic';
+	//sTopicRcv : STRING;
+	sPayloadRcv1 : STRING(255);
+    sPayloadRcv2 : STRING(255);
+	fbMessageQueue : FB_IotMqttMessageQueue;
+	fbMessage : FB_IotMqttMessage;
+
+	//nPayloadSize : UDINT;
+
+END_VAR
+VAR CONSTANT
+    (* subscriptions *)
+    sTopicSub1 : STRING(255) := 'my first topic';
+    sTopicSub2 : STRING(255) := 'my second topic'; 
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bSetParmeter THEN
+	bSetParmeter := FALSE;
+	fbMqttClient.sHostName := '192.168.0.144';
+	fbMqttClient.nHostPort := 1883;
+	fbMqttClient.sTopicPrefix := '';
+	fbMqttClient.ipMessageQueue := fbMessageQueue;
+	
+END_IF
+
+fbMqttClient.Execute(bconnect);
+
+
+IF fbMqttClient.bConnected THEN
+	IF NOT bSubscribed THEN
+		bSubscribed := fbMqttClient.Subscribe(sTopic := sTopicSub1, eQos := TcIotMqttQos.AtMostOnceDelivery);
+		bSubscribed := fbMqttClient.Subscribe(sTopic := sTopicSub2, eQos := TcIotMqttQos.AtMostOnceDelivery);
+	END_IF
+	fbTimer(IN:=TRUE);
+	IF fbTimer.Q THEN
+		fbTimer(IN :=FALSE);
+		i := i+1;
+		IF i MOD 2 = 1 THEN
+			sPayloadPub := CONCAT('MyMessage', TO_STRING(i));
+			fbMqttClient.Publish( sTopic:= sTopicPub1, pPayload := ADR(sPayloadPub), nPayloadSize := SIZEOF(sPayloadPub)+1, 
+							eQoS := TcIotMqttQos.AtMostOnceDelivery, bRetain:= FALSE, bQueue := FALSE);
+		ELSE
+			sPayloadPub := CONCAT('MyMessage', TO_STRING(i));
+			fbMqttClient.Publish( sTopic:= sTopicPub2, pPayload := ADR(sPayloadPub), nPayloadSize := SIZEOF(sPayloadPub)+1, 
+							eQoS := TcIotMqttQos.AtMostOnceDelivery, bRetain:= FALSE, bQueue := FALSE);
+		END_IF
+	END_IF
+	
+END_IF
+IF fbMessageQueue.nQueuedMessages > 0 THEN
+    IF fbMessageQueue.Dequeue(fbMessage:=fbMessage) THEN
+        IF fbMessage.CompareTopic(sTopic:=sTopicSub1) THEN
+            fbMessage.GetPayload(pPayload:=ADR(sPayloadRcv1), nPayloadSize:=SIZEOF(sPayloadRcv1), bSetNullTermination:=FALSE);
+        ELSIF fbMessage.CompareTopic(sTopic:=sTopicSub2) THEN
+            fbMessage.GetPayload(pPayload:=ADR(sPayloadRcv2), nPayloadSize:=SIZEOF(sPayloadRcv2), bSetNullTermination:=FALSE);
+        END_IF
+    END_IF
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MQTT_MAIN">
+      <LineId Id="202" Count="14" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="217" Count="4" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="288" Count="1" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="293" Count="1" />
+      <LineId Id="291" Count="1" />
+      <LineId Id="227" Count="2" />
+      <LineId Id="268" Count="7" />
+      <LineId Id="236" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
